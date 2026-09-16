@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L'ÉTOILE - Michelin Tasting Menu</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background-color: #0d0d0d;
             color: #d4af37;
@@ -16,6 +21,7 @@
             align-items: center;
             padding: 40px 20px;
         }
+
         .menu-card {
             background: linear-gradient(145deg, #141414, #0a0a0a);
             border: 1px solid #c5a059;
@@ -26,13 +32,18 @@
             text-align: center;
             position: relative;
         }
+
         .menu-card::before {
             content: '';
             position: absolute;
-            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
             border: 1px solid rgba(197, 160, 89, 0.3);
             pointer-events: none;
         }
+
         .header h1 {
             font-size: 2rem;
             letter-spacing: 7px;
@@ -40,28 +51,32 @@
             margin-bottom: 6px;
             font-weight: 400;
         }
+
         .header p {
             font-size: 0.75rem;
             letter-spacing: 3px;
             color: #8c8c8c;
+            text-transform: uppercase;
         }
+
         .star-icon {
             color: #c5a059;
             margin: 18px 0;
             font-size: 0.9rem;
             letter-spacing: 5px;
         }
+
         .hero-container {
             margin: 24px 0;
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(197, 160, 89, 0.4);
-            border-radius: 4px;
+            border-radius: 2px;
             background-color: #000;
-            /* 严格按 1005x495 图片比例展示，防止图像变形或折叠 */
             aspect-ratio: 1005 / 495;
             width: 100%;
         }
+
         .hero-img {
             width: 100%;
             height: 100%;
@@ -69,31 +84,52 @@
             display: block;
             transition: transform 0.6s ease;
         }
+
         .hero-container:hover .hero-img {
             transform: scale(1.04);
         }
+
         .divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, #c5a059, transparent);
             margin: 28px auto;
             width: 80%;
         }
-        .menu-item { margin-bottom: 22px; }
+
+        .menu-item {
+            margin-bottom: 22px;
+        }
+
         .item-title {
             font-size: 1rem;
             color: #e5c158;
             letter-spacing: 2px;
             font-weight: 600;
+            text-transform: uppercase;
         }
+
         .item-desc {
             font-size: 0.82rem;
             color: #aaa;
             margin-top: 5px;
             font-style: italic;
         }
-        .footer { margin-top: 32px; }
-        .price { font-size: 1.25rem; letter-spacing: 3px; color: #f3e5ab; }
-        .note { font-size: 0.7rem; color: #666; margin-top: 8px; }
+
+        .footer {
+            margin-top: 32px;
+        }
+
+        .price {
+            font-size: 1.25rem;
+            letter-spacing: 3px;
+            color: #f3e5ab;
+        }
+
+        .note {
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 8px;
+        }
     </style>
 </head>
 <body>
@@ -107,8 +143,7 @@
         <div class="star-icon">★ ★ ★</div>
 
         <div class="hero-container">
-            <!-- 增加 ?v=1 参数突破 CDN 缓存缓存瓶颈 -->
-            < img class="hero-img" src="fggfg.png?v=1" alt="Michelin Signature Dish">
+            < img class="hero-img" src="fggfg.png" alt="Michelin Signature Dish">
         </div>
 
         <div class="divider"></div>
