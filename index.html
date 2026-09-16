@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>尊享电子菜谱</title>
     <style>
         :root {
@@ -27,182 +27,125 @@
             color: var(--text-primary);
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
             min-height: 100vh;
-            padding-bottom: 60px;
+            padding-bottom: 40px;
+            overflow-x: hidden;
+        }
+
+        /* 全局防撑爆设置 */
+        img {
+            max-width: 100% !important;
+            height: auto;
+            display: block;
         }
 
         header {
             background: rgba(28, 24, 21, 0.95);
             border-bottom: 1px solid var(--border-color);
-            padding: 24px 20px;
+            padding: 20px 16px;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
         }
 
         .restaurant-name {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--accent-gold);
             margin-bottom: 4px;
         }
 
         .restaurant-slogan {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-        }
-
-        .category-nav {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            padding: 16px 20px;
-            overflow-x: auto;
-            position: sticky;
-            top: 80px;
-            z-index: 90;
-            background-color: var(--bg-color);
-        }
-
-        .tab-btn {
-            background: #26211d;
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
-            color: #ffffff;
-            border-color: transparent;
-            font-weight: 600;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 10px 16px;
-        }
-
-        .section-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--accent-gold);
-            margin: 20px 0 14px 4px;
+            padding: 16px;
         }
 
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            gap: 16px;
         }
 
         .dish-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            cursor: pointer;
         }
 
+        /* 强行裁剪固定图片容器大小 */
         .dish-img-box {
             position: relative;
             width: 100%;
-            height: 200px;
+            height: 220px;
             background-color: #26211d;
             overflow: hidden;
         }
 
         .dish-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
         }
 
         .dish-badge {
             position: absolute;
-            top: 12px;
-            left: 12px;
+            top: 10px;
+            left: 10px;
             background: #dc2626;
             color: #ffffff;
             font-size: 0.75rem;
             font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 12px;
+            padding: 3px 8px;
+            border-radius: 8px;
             z-index: 2;
         }
 
         .dish-info {
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
+            padding: 14px;
         }
 
         .dish-name {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 6px;
         }
 
         .dish-desc {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             line-height: 1.4;
-            margin-bottom: 14px;
-        }
-
-        .dish-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            margin-bottom: 12px;
         }
 
         .dish-price {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--price-color);
         }
 
-        .dish-price span {
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: var(--text-secondary);
-        }
-
-        .view-btn {
-            background: rgba(217, 119, 6, 0.15);
-            color: var(--accent-gold);
-            border: 1px solid var(--accent-gold);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
+        /* 弹窗样式 */
         .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.88);
-            backdrop-filter: blur(8px);
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 16px;
         }
 
         .modal.active {
@@ -212,137 +155,102 @@
         .modal-content {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            max-width: 500px;
+            border-radius: 12px;
+            max-width: 450px;
             width: 100%;
             overflow: hidden;
             position: relative;
         }
 
         .modal-content img {
-            width: 100%;
-            max-height: 350px;
-            object-fit: cover;
-            display: block;
+            width: 100% !important;
+            max-height: 300px !important;
+            object-fit: cover !important;
         }
 
         .modal-body {
-            padding: 20px;
+            padding: 16px;
         }
 
         .close-btn {
             position: absolute;
-            top: 12px;
-            right: 16px;
+            top: 10px;
+            right: 12px;
             color: #ffffff;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            background: rgba(0,0,0,0.5);
-            width: 36px;
-            height: 36px;
+            background: rgba(0,0,0,0.6);
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px 20px 10px 20px;
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            border-top: 1px solid var(--border-color);
-            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="restaurant-name">美馔佳肴 · 美食私房菜</div>
+        <div class="restaurant-name">美馔佳肴 · 私房菜菜单</div>
         <div class="restaurant-slogan">匠心烹饪，美味尽在舌尖</div>
     </header>
 
-    <div class="category-nav">
-        <button class="tab-btn active">全部菜品</button>
-        <button class="tab-btn">主厨推荐</button>
-        <button class="tab-btn">招牌热菜</button>
-        <button class="tab-btn">精选特饮</button>
-    </div>
-
     <div class="container">
-        <div class="section-title">招牌推荐菜品</div>
-        
         <div class="menu-grid">
-            <div class="dish-card" onclick="openModal('./A.png', '招牌特色美馔 A', '¥88', '选用优质新鲜食材，大火爆炒，口感鲜香麻辣，本店必点招牌菜。')">
+            <!-- 菜品 A -->
+            <div class="dish-card" onclick="openModal('A.png', '清爽饮品 A', '¥18', '解腻清爽，口感细腻。')">
                 <div class="dish-img-box">
-                    <span class="dish-badge">镇店之宝</span>
-                    < img src="./A.png" alt="菜品 A">
+                    <span class="dish-badge">招牌饮品</span>
+                    < img src="A.png" alt="菜品 A">
                 </div>
                 <div class="dish-info">
-                    <div>
-                        <div class="dish-name">招牌特色美馔 A</div>
-                        <div class="dish-desc">选用优质新鲜食材，大火爆炒，口感鲜香麻辣，本店必点招牌菜。</div>
-                    </div>
-                    <div class="dish-bottom">
-                        <div class="dish-price">¥88 <span>/ 份</span></div>
-                        <div class="view-btn">查看大图</div>
-                    </div>
+                    <div class="dish-name">清爽饮品 A</div>
+                    <div class="dish-desc">解腻清爽，口感细腻。</div>
+                    <div class="dish-price">¥18</div>
                 </div>
             </div>
 
-            <div class="dish-card" onclick="openModal('./B.png', '主厨精选佳肴 B', '¥128', '传统工序慢火炖煮，汤汁浓郁，肉质鲜嫩入味。')">
+            <!-- 菜品 B -->
+            <div class="dish-card" onclick="openModal('B.png', '特色菜品 B', '¥88', '传统工序慢火炖煮，汤汁浓郁。')">
                 <div class="dish-img-box">
                     <span class="dish-badge">主厨推荐</span>
-                    < img src="./B.png" alt="菜品 B">
+                    < img src="B.png" alt="菜品 B">
                 </div>
                 <div class="dish-info">
-                    <div>
-                        <div class="dish-name">主厨精选佳肴 B</div>
-                        <div class="dish-desc">传统工序慢火炖煮，汤汁浓郁，肉质鲜嫩入味。</div>
-                    </div>
-                    <div class="dish-bottom">
-                        <div class="dish-price">¥128 <span>/ 份</span></div>
-                        <div class="view-btn">查看大图</div>
-                    </div>
+                    <div class="dish-name">特色菜品 B</div>
+                    <div class="dish-desc">传统工序慢火炖煮，汤汁浓郁。</div>
+                    <div class="dish-price">¥88</div>
                 </div>
             </div>
 
-            <div class="dish-card" onclick="openModal('./C.png', '典藏美味名菜 C', '¥68', '清爽解腻，用料考究，层次丰富，深受顾客喜爱。')">
+            <!-- 菜品 C -->
+            <div class="dish-card" onclick="openModal('C.png', '典藏美味 C', '¥68', '用料考究，层次丰富。')">
                 <div class="dish-img-box">
                     <span class="dish-badge">人气热销</span>
-                    < img src="./C.png" alt="菜品 C">
+                    < img src="C.png" alt="菜品 C">
                 </div>
                 <div class="dish-info">
-                    <div>
-                        <div class="dish-name">典藏美味名菜 C</div>
-                        <div class="dish-desc">清爽解腻，用料考究，层次丰富，深受顾客喜爱。</div>
-                    </div>
-                    <div class="dish-bottom">
-                        <div class="dish-price">¥68 <span>/ 份</span></div>
-                        <div class="view-btn">查看大图</div>
-                    </div>
+                    <div class="dish-name">典藏美味 C</div>
+                    <div class="dish-desc">用料考究，层次丰富。</div>
+                    <div class="dish-price">¥68</div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- 弹窗 -->
     <div class="modal" id="dishModal" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeModal()">&times;</span>
             < img id="modalImg" src="" alt="菜品大图">
             <div class="modal-body">
-                <h3 id="modalTitle" class="dish-name" style="font-size: 1.3rem;"></h3>
-                <div id="modalPrice" class="dish-price" style="margin: 8px 0;"></div>
-                <p id="modalDesc" class="dish-desc" style="font-size: 0.9rem; margin-bottom: 0;"></p >
+                <h3 id="modalTitle" class="dish-name" style="font-size: 1.2rem;"></h3>
+                <div id="modalPrice" class="dish-price" style="margin: 6px 0;"></div>
+                <p id="modalDesc" class="dish-desc" style="margin-bottom: 0;"></p >
             </div>
         </div>
     </div>
-
-    <footer>
-        <p>欢迎光临 · 祝您用餐愉快</p >
-        <p style="margin-top: 4px; color: #78716c;">营业时间：10:00 - 22:00</p >
-    </footer>
 
     <script>
         function openModal(imgSrc, title, price, desc) {
