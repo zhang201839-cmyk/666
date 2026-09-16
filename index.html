@@ -6,18 +6,22 @@
     <title>张一丹的小餐馆 | Bistro de Yidan · 米其林三星顶奢体验</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+SC:wght@300;400;600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <!-- 引入手写体：中文字体 Ma Shan Zheng，英文手写体 Caveat 和 Dancing Script -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Dancing+Script:wght@600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #0a0a0c;
-            --card-bg: rgba(20, 20, 24, 0.75);
-            --accent-gold: #d4af37;
-            --accent-gold-light: #f3e5ab;
-            --text-primary: #f8f9fa;
-            --text-secondary: #b0b5c0;
-            --border-gold: rgba(212, 175, 55, 0.25);
-            --gold-glow: rgba(212, 175, 55, 0.15);
+            /* 浅紫色系与复古雅金色系 */
+            --bg-color: #f6f0fa;
+            --bg-accent: #ede2f5;
+            --card-bg: rgba(255, 255, 255, 0.88);
+            --accent-gold: #966b1e;          /* 暖金棕色，适合浅色背景 */
+            --accent-gold-light: #6e4e15;
+            --text-primary: #2e1d3d;         /* 深紫墨色 */
+            --text-secondary: #6b577a;       /* 烟灰紫色 */
+            --border-gold: rgba(150, 107, 30, 0.3);
+            --gold-glow: rgba(150, 107, 30, 0.12);
+            --lace-purple: #cbb4e3;          /* 蕾丝浅紫边线 */
         }
 
         * {
@@ -29,16 +33,20 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
-            font-family: 'Noto Serif SC', 'Montserrat', serif;
-            line-height: 1.7;
+            /* 全局采用手写体 */
+            font-family: 'Ma Shan Zheng', 'Caveat', 'STKaiti', 'KaiTi', '华文楷体', cursive, sans-serif;
+            line-height: 1.8;
             overflow-x: hidden;
+            /* 浅紫色渐变背景 */
             background-image: 
-                radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 40%);
+                radial-gradient(circle at 12% 18%, rgba(206, 172, 235, 0.35) 0%, transparent 45%),
+                radial-gradient(circle at 88% 82%, rgba(188, 142, 222, 0.25) 0%, transparent 45%),
+                linear-gradient(135deg, #faf5fc 0%, #f4ecf9 50%, #eee4f7 100%);
+            min-height: 100vh;
         }
 
         header {
-            padding: 2rem 8%;
+            padding: 1.8rem 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -47,7 +55,8 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background-color: rgba(10, 10, 12, 0.85);
+            background-color: rgba(246, 240, 250, 0.88);
+            box-shadow: 0 4px 20px rgba(120, 80, 150, 0.05);
         }
 
         .brand {
@@ -56,46 +65,43 @@
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.1em;
             color: var(--accent-gold);
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            text-shadow: 0 2px 4px rgba(150, 107, 30, 0.15);
         }
 
         .subtitle {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.35em;
+            font-family: 'Dancing Script', 'Caveat', cursive;
+            font-size: 0.95rem;
+            letter-spacing: 0.2em;
             color: var(--text-secondary);
-            margin-top: -2px;
+            margin-top: -4px;
         }
 
         nav a {
             color: var(--text-secondary);
             text-decoration: none;
             margin-left: 2.5rem;
-            font-size: 0.8rem;
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
+            font-size: 1.15rem;
+            letter-spacing: 0.1em;
             transition: all 0.3s ease;
             position: relative;
         }
 
         nav a:hover, nav a.active {
             color: var(--accent-gold);
+            font-weight: 600;
         }
 
         nav a::after {
             content: '';
             position: absolute;
-            bottom: -6px;
+            bottom: -4px;
             left: 0;
             width: 0%;
-            height: 1px;
+            height: 2px;
             background: var(--accent-gold);
             transition: width 0.3s ease;
         }
@@ -109,7 +115,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4rem 8%;
+            padding: 3.5rem 8%;
         }
 
         .container {
@@ -121,27 +127,69 @@
             align-items: center;
         }
 
+        /* ------------------------------------------------------------------ */
+        /*  图片花边相框设计 (蕾丝花边 + 欧式雕花四角) */
+        /* ------------------------------------------------------------------ */
         .image-wrapper {
             position: relative;
             padding: 18px;
-            border: 1px solid var(--border-gold);
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 30px var(--gold-glow);
-            border-radius: 4px;
-            overflow: hidden;
+            background: #ffffff;
+            border-radius: 16px;
+            /* 多重花边效果：虚线边框 + 双层衬色 + 柔和紫阴影 */
+            border: 2px dashed var(--accent-gold);
+            box-shadow: 
+                0 0 0 5px #ffffff,
+                0 0 0 8px var(--lace-purple),
+                0 0 0 12px #ffffff,
+                0 15px 40px rgba(110, 60, 140, 0.16);
+            overflow: visible;
         }
 
+        /* 内部细金丝线花边 */
         .image-wrapper::before {
             content: '';
             position: absolute;
-            top: 6px;
-            left: 6px;
-            right: 6px;
-            bottom: 6px;
-            border: 1px solid var(--accent-gold);
-            opacity: 0.3;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px dotted var(--accent-gold);
+            border-radius: 12px;
+            opacity: 0.6;
             pointer-events: none;
+            z-index: 2;
+        }
+
+        /* 四个角落的精致复古花边角饰 */
+        .lace-corner {
+            position: absolute;
+            width: 44px;
+            height: 44px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .lace-corner.top-left {
+            top: -6px;
+            left: -6px;
+        }
+
+        .lace-corner.top-right {
+            top: -6px;
+            right: -6px;
+            transform: scaleX(-1);
+        }
+
+        .lace-corner.bottom-left {
+            bottom: -6px;
+            left: -6px;
+            transform: scaleY(-1);
+        }
+
+        .lace-corner.bottom-right {
+            bottom: -6px;
+            right: -6px;
+            transform: scale(-1, -1);
         }
 
         .dish-img {
@@ -149,14 +197,17 @@
             height: 480px;
             display: block;
             object-fit: cover;
-            border-radius: 2px;
+            border-radius: 10px;
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
-            filter: contrast(1.05) brightness(0.98);
+            position: relative;
+            z-index: 1;
         }
 
         .image-wrapper:hover .dish-img {
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
+
+        /* ------------------------------------------------------------------ */
 
         .dish-details {
             display: flex;
@@ -166,33 +217,33 @@
 
         .michelin-stars {
             color: var(--accent-gold);
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             letter-spacing: 0.4em;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
         }
 
         .category {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.15rem;
+            letter-spacing: 0.15em;
             color: var(--accent-gold);
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
         }
 
         .title {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 2.8rem;
-            font-weight: 600;
-            line-height: 1.25;
-            margin-bottom: 1.5rem;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1.2rem;
             color: var(--text-primary);
         }
 
         .title i {
-            font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
-            font-weight: 400;
-            font-size: 1.8rem;
+            font-family: 'Dancing Script', 'Ma Shan Zheng', cursive;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 2rem;
             color: var(--accent-gold-light);
             display: block;
             margin-top: 0.3rem;
@@ -200,48 +251,46 @@
 
         .description {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            margin-bottom: 1.8rem;
             line-height: 1.9;
         }
 
         .flavor-notes {
-            border-left: 2px solid var(--accent-gold);
+            border-left: 3px solid var(--accent-gold);
             padding-left: 1.5rem;
-            margin-bottom: 2.5rem;
-            font-style: italic;
-            color: #e0e0e0;
-            font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
-            font-size: 1.15rem;
-            background: linear-gradient(90deg, rgba(212,175,55,0.05) 0%, transparent 100%);
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
+            margin-bottom: 2.2rem;
+            color: #4a3359;
+            font-size: 1.35rem;
+            background: linear-gradient(90deg, rgba(206, 172, 235, 0.28) 0%, transparent 100%);
+            padding-top: 0.6rem;
+            padding-bottom: 0.6rem;
+            border-radius: 0 10px 10px 0;
         }
 
         .dish-selector {
             display: flex;
             gap: 1rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2.2rem;
         }
 
         .tab-btn {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border-gold);
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px dashed var(--accent-gold);
             color: var(--text-secondary);
-            padding: 0.6rem 1.2rem;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
+            padding: 0.5rem 1.3rem;
+            font-size: 1.05rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Ma Shan Zheng', cursive;
+            border-radius: 20px;
         }
 
         .tab-btn:hover, .tab-btn.active {
             border-color: var(--accent-gold);
-            color: var(--accent-gold);
-            background: rgba(212, 175, 55, 0.1);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            color: #ffffff;
+            background: var(--accent-gold);
+            box-shadow: 0 4px 15px rgba(150, 107, 30, 0.25);
         }
 
         .price-section {
@@ -251,58 +300,58 @@
         }
 
         .price {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
+            font-family: 'Caveat', cursive;
+            font-size: 3rem;
             color: var(--accent-gold);
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .btn-reserve {
-            background: transparent;
+            background: #ffffff;
             color: var(--accent-gold);
-            border: 1px solid var(--accent-gold);
-            padding: 1.1rem 2.8rem;
-            font-size: 0.8rem;
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
+            border: 2px dashed var(--accent-gold);
+            padding: 0.8rem 2.5rem;
+            font-size: 1.2rem;
+            font-family: 'Ma Shan Zheng', cursive;
+            letter-spacing: 0.1em;
             cursor: pointer;
             transition: all 0.4s ease;
             position: relative;
-            overflow: hidden;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(150, 107, 30, 0.12);
         }
 
         .btn-reserve:hover {
             background-color: var(--accent-gold);
-            color: var(--bg-color);
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
-            font-weight: 600;
+            color: #ffffff;
+            border-style: solid;
+            box-shadow: 0 8px 25px rgba(150, 107, 30, 0.3);
+            transform: translateY(-2px);
         }
 
         .menu-gallery {
-            padding: 6rem 8%;
-            border-top: 1px solid var(--border-gold);
-            background: rgba(15, 15, 18, 0.5);
+            padding: 5rem 8%;
+            border-top: 1px dashed var(--border-gold);
+            background: rgba(238, 226, 248, 0.5);
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3.5rem;
         }
 
         .section-title {
-            font-size: 2.2rem;
-            color: var(--accent-gold);
-            font-family: 'Noto Serif SC', serif;
-            letter-spacing: 0.2em;
+            font-size: 2.6rem;
+            color: var(--text-primary);
+            letter-spacing: 0.1em;
         }
 
         .section-desc {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            margin-top: 0.5rem;
+            color: var(--accent-gold);
+            font-size: 1.15rem;
+            font-family: 'Dancing Script', cursive;
+            letter-spacing: 0.2em;
+            margin-top: 0.3rem;
         }
 
         .cards-grid {
@@ -315,57 +364,71 @@
 
         .card {
             background: var(--card-bg);
-            border: 1px solid var(--border-gold);
+            border: 1px solid rgba(150, 107, 30, 0.15);
             padding: 1.5rem;
             transition: all 0.4s ease;
             cursor: pointer;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(120, 80, 150, 0.06);
         }
 
         .card:hover {
             transform: translateY(-8px);
             border-color: var(--accent-gold);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 20px var(--gold-glow);
+            box-shadow: 0 18px 35px rgba(120, 80, 150, 0.15);
+        }
+
+        /* 卡片图片的花边外框 */
+        .card-img-wrap {
+            position: relative;
+            padding: 8px;
+            background: #ffffff;
+            border: 1.5px dashed var(--lace-purple);
+            border-radius: 10px;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 0 0 4px #ffffff, 0 4px 12px rgba(120, 80, 150, 0.08);
         }
 
         .card-img {
             width: 100%;
-            height: 250px;
+            height: 230px;
             object-fit: cover;
-            margin-bottom: 1.5rem;
-            filter: brightness(0.95);
+            border-radius: 6px;
+            display: block;
         }
 
         .card-title {
-            font-size: 1.2rem;
+            font-size: 1.45rem;
             color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
         }
 
         .card-price {
             color: var(--accent-gold);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
         .card-desc {
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 1.05rem;
             line-height: 1.6;
         }
 
         footer {
             text-align: center;
-            padding: 3.5rem 0;
+            padding: 3rem 0;
             border-top: 1px solid var(--border-gold);
             color: var(--text-secondary);
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+            background: var(--bg-color);
         }
 
-        /* 预订二维码弹窗样式 */
+        /* 预订二维码弹窗 */
         .modal {
             display: none;
             position: fixed;
@@ -373,8 +436,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
+            background: rgba(46, 29, 61, 0.55);
+            backdrop-filter: blur(8px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -389,36 +452,47 @@
 
         .modal-content {
             position: relative;
-            background: #121216;
-            border: 1px solid var(--accent-gold);
+            background: #ffffff;
+            border: 2px dashed var(--accent-gold);
             padding: 2.5rem;
-            border-radius: 8px;
+            border-radius: 16px;
             max-width: 380px;
             width: 90%;
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.25);
+            box-shadow: 
+                0 0 0 6px #ffffff,
+                0 0 0 10px var(--lace-purple),
+                0 20px 50px rgba(50, 20, 70, 0.25);
             text-align: center;
         }
 
         .modal-title {
             color: var(--accent-gold);
-            font-size: 1.1rem;
-            letter-spacing: 0.15em;
+            font-size: 1.6rem;
+            letter-spacing: 0.1em;
             margin-bottom: 1.2rem;
+            font-weight: 700;
+        }
+
+        .modal-img-wrap {
+            padding: 8px;
+            border: 1.5px dashed var(--accent-gold);
+            border-radius: 10px;
+            background: #fdfafc;
         }
 
         .modal-img {
             width: 100%;
-            border-radius: 4px;
+            border-radius: 6px;
             display: block;
             margin: 0 auto;
         }
 
         .close-btn {
             position: absolute;
-            top: 10px;
+            top: 12px;
             right: 18px;
             color: var(--text-secondary);
-            font-size: 1.8rem;
+            font-size: 2rem;
             cursor: pointer;
             transition: color 0.3s;
             line-height: 1;
@@ -438,10 +512,10 @@
             }
             header {
                 flex-direction: column;
-                gap: 1.5rem;
+                gap: 1.2rem;
             }
             nav a {
-                margin: 0 1rem;
+                margin: 0 0.8rem;
             }
         }
     </style>
@@ -451,25 +525,56 @@
     <header>
         <div class="brand">
             <div class="logo">张一丹的小餐馆</div>
-            <div class="subtitle">BISTRO DE YIDAN · MICHELIN 3-STAR</div>
+            <div class="subtitle">Bistro de Yidan · Michelin 3-Star</div>
         </div>
         <nav>
             <a href="#" class="active">典藏菜单</a>
             <a href="#">主厨哲学</a>
-            <a href="#" onclick="openModal()">CHEF'S TABLE</a>
+            <a href="#" onclick="openModal()">Chef's Table</a>
             <a href="#" onclick="openModal()">尊荣预订</a>
         </nav>
     </header>
 
     <section class="hero">
         <div class="container">
+            <!-- 带有欧式复古蕾丝花边相框的主图区 -->
             <div class="image-wrapper">
+                <!-- 四角花纹装饰 SVG -->
+                <svg class="lace-corner top-left" viewBox="0 0 50 50">
+                    <path d="M 4 46 L 4 16 C 4 9 9 4 16 4 L 46 4" fill="none" stroke="#966b1e" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M 9 46 L 9 19 C 9 13 13 9 19 9 L 46 9" fill="none" stroke="#cbb4e3" stroke-width="1.5" stroke-dasharray="3,2"/>
+                    <circle cx="15" cy="15" r="4.5" fill="#966b1e"/>
+                    <circle cx="5" cy="5" r="3" fill="#cbb4e3"/>
+                    <path d="M 15 15 Q 32 10 38 24 Q 24 38 10 32 Z" fill="#f6effa" stroke="#966b1e" stroke-width="1.2"/>
+                </svg>
+                <svg class="lace-corner top-right" viewBox="0 0 50 50">
+                    <path d="M 4 46 L 4 16 C 4 9 9 4 16 4 L 46 4" fill="none" stroke="#966b1e" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M 9 46 L 9 19 C 9 13 13 9 19 9 L 46 9" fill="none" stroke="#cbb4e3" stroke-width="1.5" stroke-dasharray="3,2"/>
+                    <circle cx="15" cy="15" r="4.5" fill="#966b1e"/>
+                    <circle cx="5" cy="5" r="3" fill="#cbb4e3"/>
+                    <path d="M 15 15 Q 32 10 38 24 Q 24 38 10 32 Z" fill="#f6effa" stroke="#966b1e" stroke-width="1.2"/>
+                </svg>
+                <svg class="lace-corner bottom-left" viewBox="0 0 50 50">
+                    <path d="M 4 46 L 4 16 C 4 9 9 4 16 4 L 46 4" fill="none" stroke="#966b1e" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M 9 46 L 9 19 C 9 13 13 9 19 9 L 46 9" fill="none" stroke="#cbb4e3" stroke-width="1.5" stroke-dasharray="3,2"/>
+                    <circle cx="15" cy="15" r="4.5" fill="#966b1e"/>
+                    <circle cx="5" cy="5" r="3" fill="#cbb4e3"/>
+                    <path d="M 15 15 Q 32 10 38 24 Q 24 38 10 32 Z" fill="#f6effa" stroke="#966b1e" stroke-width="1.2"/>
+                </svg>
+                <svg class="lace-corner bottom-right" viewBox="0 0 50 50">
+                    <path d="M 4 46 L 4 16 C 4 9 9 4 16 4 L 46 4" fill="none" stroke="#966b1e" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M 9 46 L 9 19 C 9 13 13 9 19 9 L 46 9" fill="none" stroke="#cbb4e3" stroke-width="1.5" stroke-dasharray="3,2"/>
+                    <circle cx="15" cy="15" r="4.5" fill="#966b1e"/>
+                    <circle cx="5" cy="5" r="3" fill="#cbb4e3"/>
+                    <path d="M 15 15 Q 32 10 38 24 Q 24 38 10 32 Z" fill="#f6effa" stroke="#966b1e" stroke-width="1.2"/>
+                </svg>
+
                 <img id="featured-img" src="fggfg.png" alt="Michelin Signature Dish" class="dish-img">
             </div>
 
             <div class="dish-details">
                 <div class="michelin-stars">★ ★ ★</div>
-                <div class="category" id="featured-category">AUTUMN MENU · SIGNATURE DISH</div>
+                <div class="category" id="featured-category">Autumn Menu · Signature Dish</div>
                 
                 <h1 class="title" id="featured-title">
                     秘制金丝麦香乾麵
@@ -501,26 +606,32 @@
     <section class="menu-gallery">
         <div class="section-header">
             <h2 class="section-title">秋季三件套典藏菜单</h2>
-            <p class="section-desc">THE THREE SIGNATURE EXPERIENCES</p>
+            <p class="section-desc">The Three Signature Experiences</p>
         </div>
 
         <div class="cards-grid">
             <div class="card" onclick="switchDish('noodle')">
-                <img src="fggfg.png" alt="秘制金丝麦香乾麵" class="card-img">
+                <div class="card-img-wrap">
+                    <img src="fggfg.png" alt="秘制金丝麦香乾麵" class="card-img">
+                </div>
                 <div class="card-title">秘制金丝麦香乾麵</div>
                 <div class="card-price">¥ 888</div>
                 <div class="card-desc">特选高山小麦金丝麵，搭配微辣红油浓汁、烘焙白芝麻与有机蛋花。</div>
             </div>
 
             <div class="card" onclick="switchDish('kimbap')">
-                <img src="y.png" alt="翡翠紫菜御品金卷" class="card-img">
+                <div class="card-img-wrap">
+                    <img src="y.png" alt="翡翠紫菜御品金卷" class="card-img">
+                </div>
                 <div class="card-title">翡翠紫菜御品金卷</div>
                 <div class="card-price">¥ 688</div>
                 <div class="card-desc">头道深海紫菜包覆香稻，镶嵌高山芥末蛋丝、甜脆胡萝卜与特级菠菜。</div>
             </div>
 
             <div class="card" onclick="switchDish('soda')">
-                <img src="z.png" alt="璀璨星空苹果气泡露" class="card-img">
+                <div class="card-img-wrap">
+                    <img src="z.png" alt="璀璨星空苹果气泡露" class="card-img">
+                </div>
                 <div class="card-title">璀璨星空苹果气泡露</div>
                 <div class="card-price">¥ 388</div>
                 <div class="card-desc">零糖轻盈特调，冷萃富士苹果压榨，伴随持久细腻微气泡，清新解腻。</div>
@@ -533,19 +644,21 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <div class="modal-title">尊荣预订 · 添加微信</div>
-            <img src="zyd.jpg" alt="预订二维码" class="modal-img">
+            <div class="modal-img-wrap">
+                <img src="zyd.jpg" alt="预订二维码" class="modal-img">
+            </div>
         </div>
     </div>
 
     <footer>
-        <p>© 2026 张一丹的小餐馆 BISTRO DE YIDAN. ALL RIGHTS RESERVED.</p>
+        <p>© 2026 张一丹的小餐馆 Bistro de Yidan. All Rights Reserved.</p>
     </footer>
 
     <script>
         const dishes = {
             noodle: {
                 img: 'fggfg.png',
-                category: 'AUTUMN MENU · SIGNATURE DISH',
+                category: 'Autumn Menu · Signature Dish',
                 title: '秘制金丝麦香乾麵<i>配烘焙白芝麻与金黄蛋花</i>',
                 desc: '采用东方高山特选小麦，历经多次锤炼与日光风干形成极具弹性的曲折金丝。搭配主厨特调红油微辣浓汁，融合低温滑熟的高山有机蛋花，最后撒上微火慢烘的极品白芝麻。醇香浓郁，层次丰富。',
                 notes: '“麦香的刚劲与芝麻的柔香在舌尖交织，带来极致抚慰心灵的奢华享受。”',
@@ -553,7 +666,7 @@
             },
             kimbap: {
                 img: 'y.png',
-                category: 'AUTUMN MENU · IMPERIAL ROLL',
+                category: 'Autumn Menu · Imperial Roll',
                 title: '翡翠紫菜御品金卷<i>伴深海海苔与高山时蔬</i>',
                 desc: '严选深海头道紫菜精心包覆珍珠香稻，内部镶嵌高山有机黄芥蛋丝、特级鲜甜胡萝卜与爽口绿菠菜。每一口都是山海交融的极致清甜与丰富口感。',
                 notes: '“深海的咸鲜与陆地的甘甜在卷中完美契合，演绎口感的华丽平衡。”',
@@ -561,7 +674,7 @@
             },
             soda: {
                 img: 'z.png',
-                category: 'AUTUMN MENU · BEVERAGE SELECTION',
+                category: 'Autumn Menu · Beverage Selection',
                 title: '璀璨星空苹果气泡露<i>零糖冷萃解腻特调</i>',
                 desc: '零糖轻盈配方，特选富士红苹果冷萃压榨，注入细腻持久的特调微气泡。清爽甘甜，能瞬间提振味蕾，是搭配主打乾麵与御品金卷的最佳解腻佐饮。',
                 notes: '“活泼的气泡在舌尖跳跃，如同秋夜星空般纯粹而令人神往。”',
@@ -574,7 +687,9 @@
             if(!data) return;
 
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList ? event.currentTarget.classList.add('active') : null;
+            if(window.event && window.event.currentTarget) {
+                window.event.currentTarget.classList.add('active');
+            }
 
             const imgEl = document.getElementById('featured-img');
             imgEl.style.opacity = '0.3';
