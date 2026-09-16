@@ -6,10 +6,10 @@
     <title>张小姐的米其林</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+    <!-- Google Fonts: Cormorant Garamond & Noto Serif SC & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+SC:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
@@ -30,7 +30,7 @@
                         }
                     },
                     fontFamily: {
-                        serif: ['"Cormorant Garamond"', 'serif'],
+                        serif: ['"Cormorant Garamond"', '"Noto Serif SC"', '"Songti SC"', 'serif'],
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                     }
                 }
@@ -70,7 +70,7 @@
 
     <!-- Hero 视觉区 -->
     <section class="relative min-h-screen flex items-center justify-center pt-20 px-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-dark-800 via-dark-900 to-black">
-        <div class="absolute inset-0 opacity-20 bg-[url('Public/dish1.png')] bg-cover bg-center mix-blend-overlay"></div>
+        <div class="absolute inset-0 opacity-20 bg-[url('./Public/dish1.png')] bg-cover bg-center mix-blend-overlay"></div>
         
         <div class="relative z-10 max-w-4xl text-center space-y-8">
             <div class="flex justify-center items-center space-x-3 text-gold-500">
@@ -104,15 +104,15 @@
     <section id="menu" class="py-32 px-6 max-w-6xl mx-auto">
         <div class="text-center space-y-4 mb-20">
             <span class="text-xs uppercase tracking-[0.3em] text-gold-500">Tasting Experience</span>
-            <h2 class="font-serif text-4xl md:text-5xl text-stone-100 font-normal">三星品鉴赏味菜单</h2>
+            <h2 class="font-serif text-4xl md:text-5xl text-stone-100 font-normal tracking-normal">三星品鉴赏味菜单</h2>
             <div class="w-12 h-[1px] bg-gold-500/50 mx-auto"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <!-- 菜品卡片 1（已绑定 Public/dish1.png） -->
+            <!-- 菜品卡片 1 -->
             <div class="group border-b border-stone-800 pb-8 flex space-x-6 hover:border-gold-500/50 transition-colors">
-                <div class="w-24 h-24 shrink-0 overflow-hidden rounded border border-stone-800 group-hover:border-gold-500/40 transition-colors">
-                    < img src="Public/dish1.png" alt="吉拉多生蚝与黑鱼子酱" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="w-24 h-24 shrink-0 overflow-hidden rounded border border-stone-800 group-hover:border-gold-500/40 transition-colors bg-stone-900">
+                    < img src="./Public/dish1.png" alt="吉拉多生蚝与黑鱼子酱" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?q=80&w=400';">
                 </div>
                 <div class="flex-1 space-y-2">
                     <div class="flex justify-between items-start">
