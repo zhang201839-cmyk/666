@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>张一丹的小餐馆 | Bistro de Yidan · 米其林三星顶奢体验</title>
-    <!-- Google Fonts 引入高奢衬线与中文优雅字体 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+SC:wght@300;400;600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -38,7 +37,6 @@
                 radial-gradient(circle at 85% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 40%);
         }
 
-        /* 顶部导航 */
         header {
             padding: 2rem 8%;
             display: flex;
@@ -106,7 +104,6 @@
             width: 100%;
         }
 
-        /* 主体英雄区 */
         .hero {
             min-height: 85vh;
             display: flex;
@@ -124,7 +121,6 @@
             align-items: center;
         }
 
-        /* 左侧：菜品展示图框 */
         .image-wrapper {
             position: relative;
             padding: 18px;
@@ -162,7 +158,6 @@
             transform: scale(1.03);
         }
 
-        /* 右侧：菜品详情 */
         .dish-details {
             display: flex;
             flex-direction: column;
@@ -224,7 +219,6 @@
             padding-bottom: 0.5rem;
         }
 
-        /* 快速切菜 Selector Tab */
         .dish-selector {
             display: flex;
             gap: 1rem;
@@ -285,7 +279,6 @@
             font-weight: 600;
         }
 
-        /* 全景典藏菜单区 */
         .menu-gallery {
             padding: 6rem 8%;
             border-top: 1px solid var(--border-gold);
@@ -362,7 +355,6 @@
             line-height: 1.6;
         }
 
-        /* 页脚 */
         footer {
             text-align: center;
             padding: 3.5rem 0;
@@ -373,7 +365,69 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* 响应式适配 */
+        /* 预订二维码弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            background: #121216;
+            border: 1px solid var(--accent-gold);
+            padding: 2.5rem;
+            border-radius: 8px;
+            max-width: 380px;
+            width: 90%;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.25);
+            text-align: center;
+        }
+
+        .modal-title {
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.2rem;
+        }
+
+        .modal-img {
+            width: 100%;
+            border-radius: 4px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 18px;
+            color: var(--text-secondary);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: var(--accent-gold);
+        }
+
         @media (max-width: 1024px) {
             .container {
                 grid-template-columns: 1fr;
@@ -394,7 +448,6 @@
 </head>
 <body>
 
-    <!-- 顶栏 -->
     <header>
         <div class="brand">
             <div class="logo">张一丹的小餐馆</div>
@@ -403,20 +456,17 @@
         <nav>
             <a href="#" class="active">典藏菜单</a>
             <a href="#">主厨哲学</a>
-            <a href="#">CHEF'S TABLE</a>
-            <a href="#">尊荣预订</a>
+            <a href="#" onclick="openModal()">CHEF'S TABLE</a>
+            <a href="#" onclick="openModal()">尊荣预订</a>
         </nav>
     </header>
 
-    <!-- 核心展示区 (支持主打菜切换) -->
     <section class="hero">
         <div class="container">
-            <!-- 渲染图片区域 -->
             <div class="image-wrapper">
                 <img id="featured-img" src="fggfg.png" alt="Michelin Signature Dish" class="dish-img">
             </div>
 
-            <!-- 菜品文字区域 -->
             <div class="dish-details">
                 <div class="michelin-stars">★ ★ ★</div>
                 <div class="category" id="featured-category">AUTUMN MENU · SIGNATURE DISH</div>
@@ -434,7 +484,6 @@
                     “麦香的刚劲与芝麻的柔香在舌尖交织，带来极致抚慰心灵的奢华享受。”
                 </div>
 
-                <!-- 菜品快速切换按钮 -->
                 <div class="dish-selector">
                     <button class="tab-btn active" onclick="switchDish('noodle')">01. 秘制乾麵</button>
                     <button class="tab-btn" onclick="switchDish('kimbap')">02. 翡翠金卷</button>
@@ -443,13 +492,12 @@
 
                 <div class="price-section">
                     <div class="price" id="featured-price">¥ 888</div>
-                    <button class="btn-reserve">预订主厨餐桌</button>
+                    <button class="btn-reserve" onclick="openModal()">预订主厨餐桌</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 全景典藏菜单区 -->
     <section class="menu-gallery">
         <div class="section-header">
             <h2 class="section-title">秋季三件套典藏菜单</h2>
@@ -457,7 +505,6 @@
         </div>
 
         <div class="cards-grid">
-            <!-- 菜品 1 -->
             <div class="card" onclick="switchDish('noodle')">
                 <img src="fggfg.png" alt="秘制金丝麦香乾麵" class="card-img">
                 <div class="card-title">秘制金丝麦香乾麵</div>
@@ -465,7 +512,6 @@
                 <div class="card-desc">特选高山小麦金丝麵，搭配微辣红油浓汁、烘焙白芝麻与有机蛋花。</div>
             </div>
 
-            <!-- 菜品 2 -->
             <div class="card" onclick="switchDish('kimbap')">
                 <img src="y.png" alt="翡翠紫菜御品金卷" class="card-img">
                 <div class="card-title">翡翠紫菜御品金卷</div>
@@ -473,7 +519,6 @@
                 <div class="card-desc">头道深海紫菜包覆香稻，镶嵌高山芥末蛋丝、甜脆胡萝卜与特级菠菜。</div>
             </div>
 
-            <!-- 菜品 3 -->
             <div class="card" onclick="switchDish('soda')">
                 <img src="z.png" alt="璀璨星空苹果气泡露" class="card-img">
                 <div class="card-title">璀璨星空苹果气泡露</div>
@@ -483,12 +528,19 @@
         </div>
     </section>
 
-    <!-- 页脚 -->
+    <!-- 预订二维码弹窗 -->
+    <div id="qrModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="modal-title">尊荣预订 · 添加微信</div>
+            <img src="zyd.jpg" alt="预订二维码" class="modal-img">
+        </div>
+    </div>
+
     <footer>
         <p>© 2026 张一丹的小餐馆 BISTRO DE YIDAN. ALL RIGHTS RESERVED.</p>
     </footer>
 
-    <!-- 交互脚本：点按平滑切换展示的菜品 -->
     <script>
         const dishes = {
             noodle: {
@@ -521,11 +573,9 @@
             const data = dishes[key];
             if(!data) return;
 
-            // 切换按钮高亮
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             event.currentTarget.classList ? event.currentTarget.classList.add('active') : null;
 
-            // 更新展示内容
             const imgEl = document.getElementById('featured-img');
             imgEl.style.opacity = '0.3';
             setTimeout(() => {
@@ -539,8 +589,26 @@
             document.getElementById('featured-notes').innerHTML = data.notes;
             document.getElementById('featured-price').innerText = data.price;
 
-            // 滚动到顶部英雄区
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openModal() {
+            const modal = document.getElementById('qrModal');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('qrModal');
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('qrModal');
+            if (event.target === modal) {
+                closeModal();
+            }
         }
     </script>
 </body>
