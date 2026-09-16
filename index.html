@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>尊享电子菜谱 - 典藏美馔</title>
+    <title>尊享电子菜谱</title>
     <style>
         :root {
             --bg-color: #12100e;
@@ -25,14 +25,13 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
-            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
             min-height: 100vh;
             padding-bottom: 60px;
         }
 
-        /* 顶部饭店 Header */
         header {
-            background: linear-gradient(180deg, rgba(28,24,21,0.95) 0%, rgba(18,16,14,0.9) 100%);
+            background: rgba(28, 24, 21, 0.95);
             border-bottom: 1px solid var(--border-color);
             padding: 24px 20px;
             text-align: center;
@@ -45,7 +44,6 @@
         .restaurant-name {
             font-size: 1.6rem;
             font-weight: 700;
-            letter-spacing: 1px;
             color: var(--accent-gold);
             margin-bottom: 4px;
         }
@@ -55,7 +53,6 @@
             color: var(--text-secondary);
         }
 
-        /* 分类切换 Tab */
         .category-nav {
             display: flex;
             justify-content: center;
@@ -77,7 +74,6 @@
             font-size: 0.9rem;
             cursor: pointer;
             white-space: nowrap;
-            transition: all 0.3s ease;
         }
 
         .tab-btn.active {
@@ -85,10 +81,8 @@
             color: #ffffff;
             border-color: transparent;
             font-weight: 600;
-            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
         }
 
-        /* 主容器 */
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -100,19 +94,14 @@
             font-weight: 600;
             color: var(--accent-gold);
             margin: 20px 0 14px 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        /* 菜品网格 */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
         }
 
-        /* 菜品卡片 */
         .dish-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -120,46 +109,35 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
-        }
-
-        .dish-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
-            border-color: var(--accent-gold);
         }
 
         .dish-img-box {
             position: relative;
             width: 100%;
             height: 200px;
-            overflow: hidden;
             background-color: #26211d;
+            overflow: hidden;
         }
 
         .dish-img-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .dish-card:hover .dish-img-box img {
-            transform: scale(1.06);
+            display: block;
         }
 
         .dish-badge {
             position: absolute;
             top: 12px;
             left: 12px;
-            background: linear-gradient(135deg, #ef4444, #dc2626);
+            background: #dc2626;
             color: #ffffff;
             font-size: 0.75rem;
             font-weight: 600;
             padding: 4px 10px;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            z-index: 2;
         }
 
         .dish-info {
@@ -188,7 +166,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: auto;
         }
 
         .dish-price {
@@ -211,15 +188,8 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
-            transition: all 0.2s ease;
         }
 
-        .dish-card:hover .view-btn {
-            background: var(--accent-gold);
-            color: #ffffff;
-        }
-
-        /* 大图弹窗 modal */
         .modal {
             display: none;
             position: fixed;
@@ -253,6 +223,7 @@
             width: 100%;
             max-height: 350px;
             object-fit: cover;
+            display: block;
         }
 
         .modal-body {
@@ -275,7 +246,6 @@
             justify-content: center;
         }
 
-        /* 页脚 */
         footer {
             text-align: center;
             padding: 30px 20px 10px 20px;
@@ -288,13 +258,11 @@
 </head>
 <body>
 
-    <!-- 饭店名称与标语 -->
     <header>
         <div class="restaurant-name">美馔佳肴 · 美食私房菜</div>
         <div class="restaurant-slogan">匠心烹饪，美味尽在舌尖</div>
     </header>
 
-    <!-- 菜品分类导航 -->
     <div class="category-nav">
         <button class="tab-btn active">全部菜品</button>
         <button class="tab-btn">主厨推荐</button>
@@ -302,16 +270,14 @@
         <button class="tab-btn">精选特饮</button>
     </div>
 
-    <!-- 菜品展示区 -->
     <div class="container">
         <div class="section-title">招牌推荐菜品</div>
         
         <div class="menu-grid">
-            <!-- 菜品 A -->
-            <div class="dish-card" onclick="openModal('A.png', '招牌特色美馔 A', '¥88', '选用优质新鲜食材，大火爆炒，口感鲜香麻辣，本店必点招牌菜。')">
+            <div class="dish-card" onclick="openModal('./A.png', '招牌特色美馔 A', '¥88', '选用优质新鲜食材，大火爆炒，口感鲜香麻辣，本店必点招牌菜。')">
                 <div class="dish-img-box">
                     <span class="dish-badge">镇店之宝</span>
-                    < img src="A.png" alt="菜品 A" onerror="this.src='https://via.placeholder.com/600x400/26211d/d97706?text=菜品A展示图'">
+                    < img src="./A.png" alt="菜品 A">
                 </div>
                 <div class="dish-info">
                     <div>
@@ -325,11 +291,10 @@
                 </div>
             </div>
 
-            <!-- 菜品 B -->
-            <div class="dish-card" onclick="openModal('B.png', '主厨精选佳肴 B', '¥128', '传统工序慢火炖煮，汤汁浓郁，肉质鲜嫩入味。')">
+            <div class="dish-card" onclick="openModal('./B.png', '主厨精选佳肴 B', '¥128', '传统工序慢火炖煮，汤汁浓郁，肉质鲜嫩入味。')">
                 <div class="dish-img-box">
                     <span class="dish-badge">主厨推荐</span>
-                    < img src="B.png" alt="菜品 B" onerror="this.src='https://via.placeholder.com/600x400/26211d/d97706?text=菜品B展示图'">
+                    < img src="./B.png" alt="菜品 B">
                 </div>
                 <div class="dish-info">
                     <div>
@@ -343,11 +308,10 @@
                 </div>
             </div>
 
-            <!-- 菜品 C -->
-            <div class="dish-card" onclick="openModal('C.png', '典藏美味名菜 C', '¥68', '清爽解腻，用料考究，层次丰富，深受顾客喜爱。')">
+            <div class="dish-card" onclick="openModal('./C.png', '典藏美味名菜 C', '¥68', '清爽解腻，用料考究，层次丰富，深受顾客喜爱。')">
                 <div class="dish-img-box">
                     <span class="dish-badge">人气热销</span>
-                    < img src="C.png" alt="菜品 C" onerror="this.src='https://via.placeholder.com/600x400/26211d/d97706?text=菜品C展示图'">
+                    < img src="./C.png" alt="菜品 C">
                 </div>
                 <div class="dish-info">
                     <div>
@@ -363,7 +327,6 @@
         </div>
     </div>
 
-    <!-- 大图预览 Modal -->
     <div class="modal" id="dishModal" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeModal()">&times;</span>
