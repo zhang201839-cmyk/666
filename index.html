@@ -1,59 +1,69 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图片展示</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .card {
-            background: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 10px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .card img {
-            max-width: 300px;
-            height: auto;
-            border-radius: 4px;
-            display: block;
-        }
-        .card p {
-            margin-top: 10px;
-            font-weight: bold;
-            color: #333;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片展示</title>
+  <style>
+    body {
+      background-color: #f7f7f8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 24px 16px;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      width: 100%;
+      max-width: 400px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #000;
+    }
+    .card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+    }
+    .card p {
+      margin: 12px 0 0 0;
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
 
+  <div class="container">
     <h1>图片展示</h1>
 
-    <div class="gallery">
-        <div class="card">
-            < img src="可乐.jpg" alt="可乐">
-            <p>可乐</p >
-        </div>
-        <div class="card">
-            < img src="吃的.jpg" alt="吃的">
-            <p>吃的</p >
-        </div>
-        <div class="card">
-            < img src="火鸡面.jpg" alt="火鸡面">
-            <p>火鸡面</p >
-        </div>
+    <div class="card">
+      < img src="可乐.jpg" alt="可乐">
+      <p>可乐</p >
     </div>
+
+    <div class="card">
+      < img src="吃的.jpg" alt="吃的">
+      <p>吃的</p >
+    </div>
+
+    <div class="card">
+      < img src="火鸡面.jpg" alt="火鸡面">
+      <p>火鸡面</p >
+    </div>
+  </div>
 
 </body>
 </html>
