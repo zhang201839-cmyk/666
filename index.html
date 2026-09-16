@@ -1,71 +1,312 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图片展示</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background-color: #f5f5f5;
-            padding: 40px 20px;
-            font-family: system-ui, sans-serif;
-        }
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 35px;
-            color: #222;
-        }
-        .grid-box {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-            gap: 28px;
-        }
-        .item {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        .item img {
-            width: 100%;
-            height: 480px;
-            object-fit: contain;
-            display: block;
-        }
-        .item .label {
-            padding: 16px;
-            text-align: center;
-            font-size: 18px;
-            color: #333;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>米其林风尚菜谱 - Gourmet Recipe</title>
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --accent: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    /* 顶部视觉展示区 */
+    .hero {
+      position: relative;
+      height: 420px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.75);
+      transition: transform 0.5s ease;
+    }
+
+    .hero:hover .hero-img {
+      transform: scale(1.03);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 30px;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.8rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    /* 参数数据栏 */
+    .meta-bar {
+      display: flex;
+      gap: 30px;
+      padding: 20px 30px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.4);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .meta-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* 视觉画廊区 */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      padding: 30px;
+    }
+
+    .gallery-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      height: 160px;
+      border: 1px solid var(--border);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-tag {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+    }
+
+    /* 主内容排版区 */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 30px;
+      padding: 0 30px 40px 30px;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--accent);
+    }
+
+    /* 食材清单列表 */
+    .ingredients-list {
+      list-style: none;
+    }
+
+    .ingredients-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+
+    /* 烹饪步骤列表 */
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 16px;
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step-text {
+      line-height: 1.6;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .gallery, .content-grid {
+        grid-template-columns: 1fr;
+      }
+      .meta-bar {
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>图集 A B C</h1>
-        <div class="grid-box">
-            <div class="item">
-                < img src="A.png" alt="A">
-                <div class="label">A</div>
-            </div>
-            <div class="item">
-                < img src="B.png" alt="B">
-                <div class="label">B</div>
-            </div>
-            <div class="item">
-                < img src="C.png" alt="C">
-                <div class="label">C</div>
-            </div>
-        </div>
+
+  <div class="container">
+    <!-- 主图海报区域 -->
+    <div class="hero">
+      < img src="posterm.jpg" alt="主视觉图" class="hero-img">
+      <div class="hero-overlay">
+        <span class="badge">Chef's Special</span>
+        <h1 class="title">典藏风味料理</h1>
+      </div>
     </div>
+
+    <!-- 关键参数 -->
+    <div class="meta-bar">
+      <div class="meta-item">
+        <span class="meta-label">准备时间</span>
+        <span class="meta-value">20 分钟</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">烹饪用时</span>
+        <span class="meta-value">45 分钟</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">难度等级</span>
+        <span class="meta-value">中等 ⭐⭐⭐</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">份量</span>
+        <span class="meta-value">2 - 4 人份</span>
+      </div>
+    </div>
+
+    <!-- 图片展位库 -->
+    <div class="gallery">
+      <div class="gallery-card">
+        < img src="postera.jpg" alt="素材 A">
+        <div class="gallery-tag">视角 A</div>
+      </div>
+      <div class="gallery-card">
+        < img src="posterb.jpg" alt="素材 B">
+        <div class="gallery-tag">视角 B</div>
+      </div>
+      <div class="gallery-card">
+        < img src="posterm.jpg" alt="主图预览">
+        <div class="gallery-tag">主视觉</div>
+      </div>
+    </div>
+
+    <!-- 食材与步骤 -->
+    <div class="content-grid">
+      <!-- 准备食材 -->
+      <div>
+        <h2 class="section-title">准备食材</h2>
+        <ul class="ingredients-list">
+          <span>主料 A</span> <span>300g</span>
+          <li><span>核心食材 B</span> <span>150g</span></li>
+          <li><span>调味辅料 C</span> <span>2 匙</span></li>
+          <li><span>特调酱汁 D</span> <span>50ml</span></li>
+          <li><span>新鲜罗勒/香草</span> <span>适量</span></li>
+        </ul>
+      </div>
+
+      <!-- 烹饪步骤 -->
+      <div>
+        <h2 class="section-title">烹饪步骤</h2>
+        <div class="steps-list">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-text">预热烹饪设备，将所有主料洗净并按照标准切割，准备好调味酱汁备用。</div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-text">加入少许植物油，中小火慢煎食材至表面呈现金黄色泽，锁住水分与香气。</div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-text">倒入特调酱汁，转大火收汁。最后摆盘并使用香料点缀，即可完美呈现。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
